@@ -1,6 +1,6 @@
 {
-    "name": "Open Data Pathway",
-    "slug": "open-data-pathway",
+    "name": "Test Philip Second",
+    "slug": "test-philip-second",
     "organization": "fidlabs",
     "description": "The Open Data Pathway supports LDN-style datacap allocations for public, open datasets",
     "poc": "slack:U039GRGHY14",
@@ -28,7 +28,7 @@
       "allocation_bookkeeping": "https://github.com/incentives-hub/Open-Data-Pathway",
       "full_application": "TK",
       "slack_ids": ["U039GRGHY14", "U06605H3A6M"],
-      "github_handles": ["kevzak", "willscott"],
+      "github_handles": "kevzak", "willscott", "kokal33", "AlexMCon", "clriesco"
       "org_addresses": ["f1v24knjbqv5p6qrmfjj5xmlaoddzqnon2oxkzkyq"],
       "timeline": {
         "requested": "2023-12-04T14:45:44.000Z",
