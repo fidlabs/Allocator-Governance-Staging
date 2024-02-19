@@ -16,21 +16,23 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          
-      - name: Find changed JSON files in Active folder
-        id: find_json
-        run: |
-          echo "Searching for JSON files in 'active' folder..."
-          FILE_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'active/.*\.json$' | head -n 1)
-          echo "::set-output name=file_changed::$FILE_CHANGED"
 
-      - name: Notify Backend Service
-        if: steps.find_json.outputs.file_changed != ''
-        env:
-          DOMAIN: ${{ secrets.DOMAIN }}
-        run: |
-          FILE_JSON=$(echo "$FILE_CHANGED" | jq -R -s -c '.')
-          curl --header "Content-Type: application/json" \
-               --request POST \
-               --data "{\"file_changed\": $FILE_JSON}" \
-               "https://850a-46-123-252-38.ngrok-free.app/allocator/create"
+     - name: Find changed JSON files in Active folder
+       id: find_json
+       run: |
+         echo "Searching for JSON files in 'active' folder..."
+         FILE_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'active/.*\.json$' | head -n 1)
+         echo "File changed: $FILE_CHANGED"
+         echo "::set-output name=file_changed::$FILE_CHANGED"
+     
+     - name: Notify Backend Service
+       if: steps.find_json.outputs.file_changed != ''
+       env:
+         DOMAIN: ${{ secrets.DOMAIN }}
+       run: |
+         FILE_JSON="{\"file_changed\":\"${{ steps.find_json.outputs.file_changed }}\"}"
+         echo "JSON being sent: $FILE_JSON"
+         curl --header "Content-Type: application/json" \
+              --request POST \
+              --data "$FILE_JSON" \
+              "https://850a-46-123-252-38.ngrok-free.app/allocator/create"
