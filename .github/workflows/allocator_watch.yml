@@ -33,4 +33,4 @@ jobs:
           curl --header "Content-Type: application/json" \
                --request POST \
                --data "{\"file_changed\": $FILE_JSON}" \
-               "${DOMAIN}/allocator/create"
+               "https://850a-46-123-252-38.ngrok-free.app/allocator/create"
