@@ -5,7 +5,7 @@
     "description": "The Open Data Pathway supports LDN-style datacap allocations for public, open datasets",
     "poc": "slack:U039GRGHY14",
     "location": "United States",
-    "address": "f1v24knjbqv5p6qrmfjj5xmlaoddzqnon2oxkzkyq",
+    "address": "t2mg2mtdrankthtrn5aymgsjjdmb5dc4h2vnmyoiy",
     "status": "active",
     "application": {
       "12m_requested": "100pb",
@@ -29,7 +29,7 @@
       "full_application": "TK",
       "slack_ids": ["U039GRGHY14", "U06605H3A6M"],
       "github_handles": ["kevzak", "willscott", "kokal33", "AlexMCon", "clriesco"],
-      "org_addresses": ["t2mg2mtdrankthtrn5aymgsjjdmb5dc4h2vnmyoiy"],
+      "org_addresses": ["f1j2v7jgg4twnh2y76l3atpbbd2vz7rt6pkxlg2my", "f1fqzg6wzl6xfjikjx45mscj6ajziktnioql4otfq", "f1ubequ7zyoo5eieojwbrt26ej7eplsolgizx52ia"],
       "timeline": {
         "requested": "2023-12-04T14:45:43.000Z",
         "approved": "2024-02-06T05:22:35.000Z"
