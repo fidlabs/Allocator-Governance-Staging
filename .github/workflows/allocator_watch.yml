@@ -35,4 +35,4 @@ jobs:
           curl --header "Content-Type: application/json" \
                --request POST \
                --data "$FILE_JSON" \
-               "https://850a-46-123-252-38.ngrok-free.app/allocator/create"
+               "https://fp-core.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com/allocator/create"
