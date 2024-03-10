@@ -8,7 +8,7 @@
     "address": "t2mg2mtdrankthtrn5aymgsjjdmb5dc4h2vnmyoiy",
     "status": "active",
     "application": {
-      "12m_requested": "100pb",
+      "12m_requested": "101pb",
       "target_clients": ["small-dev", "public"],
       "open_to_all_clients": true,
       "types_of_data": ["open-dataset", "open-commercial"],
