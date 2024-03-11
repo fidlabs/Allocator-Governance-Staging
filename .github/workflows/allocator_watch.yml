@@ -35,4 +35,4 @@ jobs:
           curl --header "Content-Type: application/json" \
                --request POST \
                --data "$FILE_JSON" \
-               "https://eb4b-46-123-250-150.ngrok-free.app/allocator/create"
+               "${DOMAIN}/allocator/create"
