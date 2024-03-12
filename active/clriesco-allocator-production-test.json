@@ -14,7 +14,7 @@
       "types_of_data": ["open-dataset", "open-commercial"],
       "required_replicas": 2,
       "required_geography": "2 regions",
-      "required_sps": 2,
+      "required_sps": 3,
       "tooling": ["common_ui", "cid_checker", "sa_bot"],
       "allocation_schedule": "standardized",
       "possible_allocations": ["500gb", "1tb", "5tb", "20tb"],
