@@ -11,7 +11,7 @@ jobs:
   watch_jsons:
     runs-on: ubuntu-latest
     env:
-      BACKEND_URL: https://fp-core.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com
+      BACKEND_URL: https://fp-core-prod.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com
 
     steps:
       - name: Checkout repository
@@ -28,9 +28,7 @@ jobs:
           echo "::set-output name=file_changed::$FILE_CHANGED"
       
       - name: Notify Backend Service
-        if: steps.find_json.outputs.file_changed != ''
-        env:
-          DOMAIN: ${{ secrets.DOMAIN }}
+        if: steps.find_json.outputs.file_changed != '' 
         run: |
           FILE_JSON="{\"file_changed\":\"${{ steps.find_json.outputs.file_changed }}\"}"
           echo "JSON being sent: $FILE_JSON"
