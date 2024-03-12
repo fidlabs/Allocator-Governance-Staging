@@ -1,6 +1,6 @@
 {
     "name": "Charly Allocator production test",
-    "slug": "clriesco-allocator-production-test",
+    "slug": "allocator-production-test",
     "organization": "clriesco",
     "description": "The Open Data Pathway supports LDN-style datacap allocations for public, open datasets - test test",
     "poc": "slack:U039GRGHY114",
