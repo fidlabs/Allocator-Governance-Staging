@@ -11,7 +11,7 @@ jobs:
   watch_jsons:
     runs-on: ubuntu-latest
     env:
-      BACKEND_URL: https://fp-core-prod.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com
+      BACKEND_URL: https://fp-core.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com/allocator/create
 
     steps:
       - name: Checkout repository
