@@ -10,6 +10,8 @@ on:
 jobs:
   watch_jsons:
     runs-on: ubuntu-latest
+    env:
+      BACKEND_URL: https://fp-core-prod.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com
 
     steps:
       - name: Checkout repository
@@ -35,4 +37,4 @@ jobs:
           curl --header "Content-Type: application/json" \
                --request POST \
                --data "$FILE_JSON" \
-               "https://fp-core.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com/allocator/create"
+               "${BACKEND_URL}/allocator/create"
