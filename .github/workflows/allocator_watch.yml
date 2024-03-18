@@ -11,7 +11,7 @@ jobs:
   watch_jsons:
     runs-on: ubuntu-latest
     env:
-      BACKEND_URL: https://1b60-2a01-261-528-5e00-dc19-f56a-7644-63bb.ngrok-free.app
+      BACKEND_URL: https://fp-core.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com/
 
     steps:
       - name: Checkout repository
