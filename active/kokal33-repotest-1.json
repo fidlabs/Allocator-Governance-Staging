@@ -12,7 +12,7 @@
       "target_clients": ["small-dev", "public"],
       "open_to_all_clients": true,
       "types_of_data": ["open-dataset", "open-commercial"],
-      "required_replicas": 3,
+      "required_replicas": 4,
       "required_geography": "4 regions",
       "required_sps": 2,
       "tooling": ["common_ui", "cid_checker", "sa_bot"],
