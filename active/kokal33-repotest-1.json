@@ -1,40 +1,40 @@
 {
-    "name": "Stojan Testrepo 1",
-    "slug": "repotest-1",
-    "organization": "kokal33",
-    "description": "The Open Data Pathway supports LDN-style datacap allocations for public, open datasets",
-    "poc": "slack:U039GRGHY14",
-    "location": "United States",
-    "address": "t2nrw4ili273htvgxy6ohznlms45kvjesxxkfxrsi",
-    "status": "active",
-    "application": {
-      "12m_requested": "100pb",
-      "target_clients": ["small-dev", "public"],
-      "open_to_all_clients": true,
-      "types_of_data": ["open-dataset", "open-commercial"],
-      "required_replicas": 4,
-      "required_geography": "4 regions",
-      "required_sps": 2,
-      "tooling": ["common_ui", "cid_checker", "sa_bot"],
-      "allocation_schedule": "standardized",
-      "possible_allocations": ["500gb", "1tb", "5tb", "20tb"],
-      "dispute_sla": "7 days",
-      "dispute_link": "https://github.com/fidlabs/Open-Data-Pathway/issues/new",
-      "update_channel": "https://github.com/fidlabs/Open-Data-Pathway",
-      "previous_activity": [
-        "https://github.com/filecoin-project/notary-governance/issues/1"
-      ],
-      "client_application_form": "https://github.com/fidlabs/Open-Data-Pathway/issues/new",
-      "allocation_bookkeeping": "https://github.com/incentives-hub/Open-Data-Pathway",
-      "full_application": "TK",
-      "slack_ids": ["U039GRGHY14", "U06605H3A6M"],
-      "github_handles": ["kevzak", "willscott", "kokal33", "AlexMCon", "clriesco"],
-      "org_addresses": ["f1j2v7jgg4twnh2y76l3atpbbd2vz7rt6pkxlg2my", "f1fqzg6wzl6xfjikjx45mscj6ajziktnioql4otfq", "f1ubequ7zyoo5eieojwbrt26ej7eplsolgizx52ia"],
-      "timeline": {
-        "requested": "2023-12-04T14:45:43.000Z",
-        "approved": "2024-02-06T05:22:35.000Z"
-      }
+  "application_number": 1005,
+  "address": "t2c3pq5xm2tpbq7thmdfih7cm2s2htdbcqit7wg7i",
+  "name": "Stojan Staging",
+  "organization": "kokal33",
+  "location": "Korea",
+  "status": "Active",
+  "metapathway_type": "Manual",
+  "associated_org_addresses": "f1j2v7jgg4twnh2y76l3atpbbd2vz7rt6pkxlg2my",
+  "application": {
+    "allocations": {
+      "standardized": "Yes; standardized"
     },
-    "common_ui_install_id": 48435569
+    "target_clients": [
+      "Individuals learning about Filecoin",
+      "Small-scale developers or data owners",
+      "Enterprise Data Clients"
+    ],
+    "required_sps": "4+",
+    "required_replicas": "4+",
+    "tooling": ["common_ui"],
+    "data_types": [
+      "Public Open Dataset (Research/Non-Profit)",
+      "Public Open Commercial/Enterprise",
+      "Private Commercial/Enterprise",
+      "Private Non-Profit/Social Impact"
+    ],
+    "12m_requested": 200,
+    "github_handles": ["kevzak", "willscott", "kokal33", "AlexMCon", "clriesco"],
+    "allocation_bookkeeping": "https://github.com/kokal33/repotest-1"
+  },
+  "poc": {
+    "slack": "psh0691",
+    "github_user": "psh0691"
+  },
+  "pathway_addresses": {
+    "msig": "t2nrw4ili273htvgxy6ohznlms45kvjesxxkfxrsi",
+    "signer": ["f1j2v7jgg4twnh2y76l3atpbbd2vz7rt6pkxlg2my", "f1fqzg6wzl6xfjikjx45mscj6ajziktnioql4otfq", "f1ubequ7zyoo5eieojwbrt26ej7eplsolgizx52ia"]
+  }
 }
-  
