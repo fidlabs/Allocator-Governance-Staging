@@ -9,7 +9,7 @@
   "associated_org_addresses": "f1j2v7jgg4twnh2y76l3atpbbd2vz7rt6pkxlg2my",
   "application": {
     "allocations": {
-      "standardized": "Yes; standardized"
+      "standardized": "Yes ; standardized"
     },
     "target_clients": [
       "Individuals learning about Filecoin",
