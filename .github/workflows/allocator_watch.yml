@@ -11,7 +11,7 @@ jobs:
   watch_jsons:
     runs-on: ubuntu-latest
     env:
-      BACKEND_URL: https://ffb0-2a01-261-550-d600-e082-2f01-833-df2d.ngrok-free.app
+      BACKEND_URL: https://monthly-assuring-troll.ngrok-free.app
 
     steps:
       - name: Checkout repository
