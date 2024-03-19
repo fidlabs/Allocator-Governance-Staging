@@ -16,7 +16,7 @@
       "Small-scale developers or data owners",
       "Enterprise Data Clients"
     ],
-    "required_sps": "3+",
+    "required_sps": "4+",
     "required_replicas": "4+",
     "tooling": ["common_ui"],
     "data_types": [
