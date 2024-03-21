@@ -35,7 +35,8 @@ jobs:
       - name: Notify Backend Service
         if: steps.find_json.outputs.files_changed != '[]' 
         run: |
-          FILES_JSON="{\"files_changed\":[$(for file in ${{ steps.find_json.outputs.files_changed }}; do echo "\"$file\""; done)]}"
+          FILES_JSON=$(echo "${{ steps.find_json.outputs.files_changed }}" | jq -r '.[] = "\(.[])"')
+          echo "JSON being sent: $FILES_JSON"
           echo "JSON being sent: $FILES_JSON"
           curl --header "Content-Type: application/json" \
                --request POST \
