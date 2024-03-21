@@ -24,12 +24,12 @@ jobs:
         run: |
           echo "Searching for JSON files in 'active' folder..."
           FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'active/.*\.json$' | while read -r line; do echo -n "\"$line\","; done)
-          FILES_CHANGED="[${FILES_CHANGED%,}]" # Trim the trailing comma and wrap with brackets
+          FILES_CHANGED="${FILES_CHANGED%,}" # Remove the trailing comma
           echo "Files changed: $FILES_CHANGED"
           echo "::set-output name=files_changed::$FILES_CHANGED"
       
       - name: Notify Backend Service
-        if: steps.find_json.outputs.files_changed != '[]' 
+        if: steps.find_json.outputs.files_changed != ''
         run: |
           FILES_JSON="{\"files_changed\":[$(echo ${{ steps.find_json.outputs.files_changed }} | sed 's/\([^,]*\)/"\1"/g')]}"
           echo "JSON being sent: $FILES_JSON"
