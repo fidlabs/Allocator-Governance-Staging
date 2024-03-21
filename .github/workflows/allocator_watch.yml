@@ -23,7 +23,7 @@ jobs:
         id: find_json
         run: |
           echo "Searching for JSON files in 'active' folder..."
-          FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'active/.*\.json$' | tr '\n' ',')
+          FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'active/.*\.json$' | sed 's/.*/"&"/' | tr '\n' ',' )
           FILES_CHANGED="[${FILES_CHANGED%,}]" # Convert to JSON array format
           echo "Files changed: $FILES_CHANGED"
           echo "::set-output name=files_changed::$FILES_CHANGED"
