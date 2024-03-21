@@ -23,16 +23,17 @@ jobs:
         id: find_json
         run: |
           echo "Searching for JSON files in 'active' folder..."
-          FILE_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'active/.*\.json$' | head -n 1)
-          echo "File changed: $FILE_CHANGED"
-          echo "::set-output name=file_changed::$FILE_CHANGED"
+          FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'active/.*\.json$' | tr '\n' ',')
+          FILES_CHANGED="[${FILES_CHANGED%,}]" # Convert to JSON array format
+          echo "Files changed: $FILES_CHANGED"
+          echo "::set-output name=files_changed::$FILES_CHANGED"
       
       - name: Notify Backend Service
-        if: steps.find_json.outputs.file_changed != '' 
+        if: steps.find_json.outputs.files_changed != '[]' 
         run: |
-          FILE_JSON="{\"file_changed\":\"${{ steps.find_json.outputs.file_changed }}\"}"
-          echo "JSON being sent: $FILE_JSON"
+          FILES_JSON="{\"files_changed\":${{ steps.find_json.outputs.files_changed }}}"
+          echo "JSON being sent: $FILES_JSON"
           curl --header "Content-Type: application/json" \
                --request POST \
-               --data "$FILE_JSON" \
+               --data "$FILES_JSON" \
                "${BACKEND_URL}/allocator/create"
