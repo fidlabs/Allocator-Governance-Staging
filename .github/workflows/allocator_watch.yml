@@ -10,20 +10,19 @@ jobs:
   notify-backend:
     runs-on: ubuntu-latest
     steps:
-      - name: Get all JSON files (changed and new)
+      - name: Get all JSON files (including staged)
         id: all_files
         run: |
-          git diff --name-only --cached HEAD~1...HEAD | grep '^active/' | grep '\.json$'  # Find changed files
-          echo " $(git ls-files active/**/*.json)" | tr '\n' ' '  # Find all files (including new)
+          git ls-files active/**/*.json  # Find all tracked JSON files
 
-      - name: Filter changed and new JSON files
+      - name: Filter changed JSON files
         id: changed_files
         run: |
           all_files=$(echo ${{ steps.all_files.outputs.all_files }})
           changed_files=$(echo "''")  # Initialize empty array variable
 
           for file in $all_files; do
-            if git diff --cached HEAD~1...HEAD -- "$file" &> /dev/null; then
+            if git diff HEAD~1...HEAD -- "$file" &> /dev/null; then
               changed_files="$changed_files,\"$file\""
             fi
           done
