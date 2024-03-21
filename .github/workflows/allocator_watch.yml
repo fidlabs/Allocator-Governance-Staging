@@ -1,29 +1,45 @@
-name: JSON Change Notification
+name: Notify Backend on JSON Changes (main branch)
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
-      - 'active/**/*.json'
+      - 'active/**/*.json'  # Detect changes and new files within "active" folder
 
 jobs:
-  notify_backend:
+  notify-backend:
     runs-on: ubuntu-latest
-    env:
-      BACKEND_URL: https://powerful-accurate-bluebird.ngrok-free.app/allocator/create
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Get all JSON files (changed and new)
+        id: all_files
+        run: |
+          git diff --name-only --cached HEAD~1...HEAD | grep '^active/' | grep '\.json$'  # Find changed files
+          echo " $(git ls-files active/**/*.json)" | tr '\n' ' '  # Find all files (including new)
 
-      - name: Get changed JSON files
-        id: get_changed_files
+      - name: Filter changed and new JSON files
+        id: changed_files
         run: |
-          echo "::set-output name=files_changed::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} -- 'active/**/*.json' | tr '\n' ',')"
-      
-      - name: Send POST request
+          all_files=$(echo ${{ steps.all_files.outputs.all_files }})
+          changed_files=$(echo "''")  # Initialize empty array variable
+
+          for file in $all_files; do
+            if git diff --cached HEAD~1...HEAD -- "$file" &> /dev/null; then
+              changed_files="$changed_files,\"$file\""
+            fi
+          done
+
+          # Remove leading comma if any files were changed
+          changed_files=${changed_files:1}
+          echo "::set-output name=changed_files::[$changed_files]"
+
+      - name: Print JSON data (for debugging)
         run: |
-          JSON_DATA='{"files_changed": "${{ steps.get_changed_files.outputs.files_changed }}"}'
-          echo "JSON sent to the back-end: $JSON_DATA"
-          curl -X POST -H "Content-Type: application/json" -d "$JSON_DATA" $BACKEND_URL
+          echo "Sending data to backend:"
+          echo '{"files_changed": '${{ steps.changed_files.outputs.changed_files }}}'
+
+      - name: Notify backend
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: https://powerful-accurate-bluebird.ngrok-free.app/allocator/create
+          method: POST
+          data: '{"files_changed": ${{ steps.changed_files.outputs.changed_files }}}'
