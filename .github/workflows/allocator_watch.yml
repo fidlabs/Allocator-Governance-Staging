@@ -1,36 +1,39 @@
-name: Notify Backend on JSON Change
+name: Applications JSON Validator on Push
 
 on:
   push:
-    paths:
-      - 'active/**/*.json'
     branches:
       - main
+    paths:
+      - 'active/**/*.json'
 
 jobs:
-  notify-backend:
+  watch_jsons:
     runs-on: ubuntu-latest
+    env:
+      BACKEND_URL: https://powerful-accurate-bluebird.ngrok-free.app
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
-      - name: Set BACKEND_URL
-        run: echo "BACKEND_URL=https://powerful-accurate-bluebird.ngrok-free.app/allocator/create" >> $GITHUB_ENV
-
+        with:
+          fetch-depth: 0
+          
       - name: Find changed JSON files in Active folder
         id: find_json
         run: |
-          echo "Finding changed JSON files..."
-          FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '^active/.*\.json$')
-          FILES_JSON=$(echo "$FILES_CHANGED" | jq -R . | jq -s .)
-          echo "FILES_JSON=${FILES_JSON}" >> $GITHUB_ENV
+          echo "Searching for JSON files in 'active' folder..."
+          FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'active/.*\.json$' | while read -r line; do echo -n "\"$line\","; done)
+          FILES_CHANGED="[${FILES_CHANGED%,}]" # Trim the trailing comma and wrap with brackets
+          echo "Files changed: $FILES_CHANGED"
+          echo "::set-output name=files_changed::$FILES_CHANGED"
       
       - name: Notify Backend Service
-        if: env.FILES_JSON != '[]'
+        if: steps.find_json.outputs.files_changed != '[]' 
         run: |
+          FILES_JSON="{\"files_changed\":[$(echo ${{ steps.find_json.outputs.files_changed }} | sed 's/\([^,]*\)/"\1"/g')]}"
+          echo "JSON being sent: $FILES_JSON"
           curl --header "Content-Type: application/json" \
                --request POST \
-               --data "{\"files_changed\":${FILES_JSON}}" \
-               "${BACKEND_URL}/update"
-        env:
-          FILES_JSON: ${{ env.FILES_JSON }}
+               --data "$FILES_JSON" \
+               "${BACKEND_URL}/allocator/create"
