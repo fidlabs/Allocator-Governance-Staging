@@ -24,6 +24,6 @@ jobs:
 
       - name: Send POST request
         run: |
-          JSON_DATA='{"files_changed": ${{ steps.get_changed_files.outputs.files_changed }}}'
+          JSON_DATA='{"files_changed": "${{ steps.get_changed_files.outputs.files_changed }}"}'
           echo "JSON sent to the back-end: $JSON_DATA"
           curl -X POST -H "Content-Type: application/json" -d "$JSON_DATA" $BACKEND_URL
