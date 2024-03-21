@@ -11,7 +11,7 @@ jobs:
   notify_backend:
     runs-on: ubuntu-latest
     env:
-      BACKEND_URL: https://powerful-accurate-bluebird.ngrok-free.app
+      BACKEND_URL: https://powerful-accurate-bluebird.ngrok-free.app/allocator/create
 
     steps:
       - name: Checkout code
