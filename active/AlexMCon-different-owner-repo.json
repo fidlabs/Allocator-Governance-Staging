@@ -1,7 +1,7 @@
 {
   "application_number": 1002,
   "address": "t23tnm3piorlpochtwhb5evojxzxyvf42a6exxcni",
-  "name": "Alexander The Test",
+  "name": "Alexander The Test Test",
   "organization": "AlexMCon",
   "location": "Korea",
   "status": "Active",
@@ -26,7 +26,7 @@
       "Private Non-Profit/Social Impact"
     ],
     "12m_requested": 200,
-    "github_handles": ["kevzak", "willscott", "kokal33", "AlexMCon", "clriesco"],
+    "github_handles": ["willscott", "kokal33", "AlexMCon", "clriesco"],
     "allocation_bookkeeping": "https://github.com/AlexMCon/different-owner-repo"
   },
   "poc": {
