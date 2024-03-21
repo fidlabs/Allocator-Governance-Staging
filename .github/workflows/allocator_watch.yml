@@ -1,4 +1,4 @@
-name: Applications JSON Validator on Push
+name: JSON Change Notification
 
 on:
   push:
@@ -8,37 +8,20 @@ on:
       - 'active/**/*.json'
 
 jobs:
-  watch_jsons:
+  notify_backend:
     runs-on: ubuntu-latest
     env:
       BACKEND_URL: https://powerful-accurate-bluebird.ngrok-free.app
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          
-      - name: Find changed JSON files in Active folder
-        id: find_json
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get changed JSON files
+        id: get_changed_files
         run: |
-          echo "Searching for JSON files in 'active' folder..."
-          FILE_PATHS=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'active/.*\.json$')
-          FILES_CHANGED=""
-          while read -r line; do
-            FILES_CHANGED="$FILES_CHANGED\"$line\","
-          done <<< "$FILE_PATHS"
-          FILES_CHANGED="[${FILES_CHANGED%,}]" # Convert to JSON array format
-          echo "Files changed: $FILES_CHANGED"
-          echo "::set-output name=files_changed::$FILES_CHANGED"
-      
-      - name: Notify Backend Service
-        if: steps.find_json.outputs.files_changed != '[]' 
+          echo "::set-output name=files_changed::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} -- 'active/**/*.json')"
+
+      - name: Send POST request
         run: |
-          FILES_JSON=$(echo "${{ steps.find_json.outputs.files_changed }}" | jq -r '.[] = "\(.[])"')
-          echo "JSON being sent: $FILES_JSON"
-          echo "JSON being sent: $FILES_JSON"
-          curl --header "Content-Type: application/json" \
-               --request POST \
-               --data "$FILES_JSON" \
-               "${BACKEND_URL}/allocator/create"
+          curl -X POST -H "Content-Type: application/json" -d '{"files_changed": ${{ steps.get_changed_files.outputs.files_changed }}}' $BACKEND_URL
