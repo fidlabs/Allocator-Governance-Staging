@@ -1,44 +1,36 @@
-name: Notify Backend on JSON Changes (main branch)
+name: Notify Backend on JSON Change
 
 on:
   push:
-    branches: [ main ]
     paths:
-      - 'active/**/*.json'  # Detect changes and new files within "active" folder
+      - 'active/**/*.json'
+    branches:
+      - main
 
 jobs:
   notify-backend:
     runs-on: ubuntu-latest
     steps:
-      - name: Get all JSON files (including staged)
-        id: all_files
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set BACKEND_URL
+        run: echo "BACKEND_URL=https://powerful-accurate-bluebird.ngrok-free.app/allocator/create" >> $GITHUB_ENV
+
+      - name: Find changed JSON files in Active folder
+        id: find_json
         run: |
-          git ls-files active/**/*.json  # Find all tracked JSON files
-
-      - name: Filter changed JSON files
-        id: changed_files
+          echo "Finding changed JSON files..."
+          FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '^active/.*\.json$')
+          FILES_JSON=$(echo "$FILES_CHANGED" | jq -R . | jq -s .)
+          echo "FILES_JSON=${FILES_JSON}" >> $GITHUB_ENV
+      
+      - name: Notify Backend Service
+        if: env.FILES_JSON != '[]'
         run: |
-          all_files=$(echo ${{ steps.all_files.outputs.all_files }})
-          changed_files=$(echo "''")  # Initialize empty array variable
-
-          for file in $all_files; do
-            if git diff HEAD~1...HEAD -- "$file" &> /dev/null; then
-              changed_files="$changed_files,\"$file\""
-            fi
-          done
-
-          # Remove leading comma if any files were changed
-          changed_files=${changed_files:1}
-          echo "::set-output name=changed_files::[$changed_files]"
-
-      - name: Print JSON data (for debugging)
-        run: |
-          echo "Sending data to backend:"
-          echo '{"files_changed": '${{ steps.changed_files.outputs.changed_files }}}'
-
-      - name: Notify backend
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: https://powerful-accurate-bluebird.ngrok-free.app/allocator/create
-          method: POST
-          data: '{"files_changed": ${{ steps.changed_files.outputs.changed_files }}}'
+          curl --header "Content-Type: application/json" \
+               --request POST \
+               --data "{\"files_changed\":${FILES_JSON}}" \
+               "${BACKEND_URL}/update"
+        env:
+          FILES_JSON: ${{ env.FILES_JSON }}
