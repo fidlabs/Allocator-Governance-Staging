@@ -20,8 +20,8 @@ jobs:
       - name: Get changed JSON files
         id: get_changed_files
         run: |
-          echo "::set-output name=files_changed::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} -- 'active/**/*.json')"
-
+          echo "::set-output name=files_changed::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} -- 'active/**/*.json' | tr '\n' ',')"
+      
       - name: Send POST request
         run: |
           JSON_DATA='{"files_changed": "${{ steps.get_changed_files.outputs.files_changed }}"}'
