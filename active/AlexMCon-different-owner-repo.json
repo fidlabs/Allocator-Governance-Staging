@@ -12,7 +12,7 @@
       "standardized": "Yes; standardized"
     },
     "allocation_amount": {
-      "amount_type": "fixed",
+      "amount_type": "percentage",
       "quantity_options": ["8TiB", "12TiB", "1PiB"]
     },
     "target_clients": [
