@@ -11,6 +11,10 @@
     "allocations": {
       "standardized": "Yes; standardized"
     },
+    "allocation_amount": {
+      "type": "percentage",
+      "quantity_options": [8, 12, 18]
+    },
     "target_clients": [
       "Individuals learning about Filecoin",
       "Small-scale developers or data owners",
