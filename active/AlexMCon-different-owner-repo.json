@@ -11,6 +11,10 @@
     "allocations": {
       "standardized": "Yes; standardized"
     },
+     "allocation_amount": {
+      "amount_type": "fixed",
+      "quantity_options": ["8TiB", "12TiB", "1PiB"]
+    },
     "target_clients": [
       "Individuals learning about Filecoin",
       "Small-scale developers or data owners",
