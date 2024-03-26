@@ -11,7 +11,7 @@ jobs:
   watch_jsons:
     runs-on: ubuntu-latest
     env:
-      BACKEND_URL: https://monthly-assuring-troll.ngrok-free.app
+      BACKEND_URL: https://powerful-accurate-bluebird.ngrok-free.app
 
     steps:
       - name: Checkout repository
