@@ -12,8 +12,8 @@
       "standardized": "Yes; standardized"
     },
     "allocation_amount": {
-      "amount_type": "percentage",
-      "quantity_options": ["8", "12", "18"]
+      "amount_type": "fixed",
+      "quantity_options": ["8TiB", "12TiB", "1PiB"]
     },
     "target_clients": [
       "Individuals learning about Filecoin",
