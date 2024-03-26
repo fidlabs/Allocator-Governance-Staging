@@ -13,7 +13,7 @@
     },
      "allocation_amount": {
       "amount_type": "percentage",
-      "quantity_options": ["5", "10%", "15%", "25"]
+      "quantity_options": ["5", "10%", "15%"]
     },
     "target_clients": [
       "Individuals learning about Filecoin",
