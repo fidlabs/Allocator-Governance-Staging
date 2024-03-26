@@ -12,7 +12,7 @@
       "standardized": "Yes; standardized"
     },
     "allocation_amount": {
-      "type": "percentage",
+      "amount_type": "percentage",
       "quantity_options": [8, 12, 18]
     },
     "target_clients": [
