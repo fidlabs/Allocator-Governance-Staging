@@ -13,7 +13,7 @@
     },
      "allocation_amount": {
       "amount_type": "fixed",
-      "quantity_options": ["8TiB", "12TiB", "1PiB"]
+      "quantity_options": ["9TiB", "25TiB", "1PiB", "2PiB"]
     },
     "target_clients": [
       "Individuals learning about Filecoin",
