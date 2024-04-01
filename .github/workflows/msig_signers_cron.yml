@@ -8,7 +8,8 @@ jobs:
   check-signers:
     runs-on: ubuntu-latest
     env:
-      BACKEND_URL: https://fp-core.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com
+      #BACKEND_URL: https://fp-core.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com
+      BACKEND_URL: https://monthly-assuring-troll.ngrok-free.app
 
     steps:
       - name: Check Signers
