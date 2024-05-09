@@ -17,8 +17,8 @@ jobs:
   watch_jsons:
     runs-on: ubuntu-latest
     env:
-      BACKEND_URL: https://powerful-accurate-bluebird.ngrok-free.app
-      #BACKEND_URL: https://fp-core.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com
+      #BACKEND_URL: https://powerful-accurate-bluebird.ngrok-free.app
+      BACKEND_URL: https://fp-core.dp04sa0tdc6pk.us-east-1.cs.amazonlightsail.com
 
     steps:
       - name: Checkout repository
